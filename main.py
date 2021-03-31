@@ -4,6 +4,10 @@ import re
 import math
 import csv
 
+# Recebe o endereço da página principal (previamente preparado como 
+# descrito no README).
+# Retorna o número de páginas que a pesquisa retornou, através 
+# da divisão do total de unidades / unidades por página.
 def Get_Num_Of_Pages(mainpageurl):
     page = requests.get(mainpageurl)
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -11,7 +15,8 @@ def Get_Num_Of_Pages(mainpageurl):
     num_of_pages = math.ceil(num_of_properties / 16)
     return num_of_pages
 
-
+# Realiza uma série de loops básicos para coletar dados exibidos para
+# cada unidade das 16 unidades exibidas no resultado para aquela página.
 def Get_all_properties_from_page(url):
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -33,11 +38,12 @@ def Get_all_properties_from_page(url):
         description = info_class.find('p', class_='corta_desc').get_text()
         amenities = info_class.find('ul', class_='amenities').find_all('li')
 
-        # Default values
+        # Valores default em caso de ausência de dado
         area = 'NULL'
         bedrooms = 'NULL'
         bathrooms = 'NULL'
 
+        # Coleta os dados sobre área, banheiros e quartos
         for amenity in amenities:
             amenity_type = amenity.find('i')['class'][0]
 
@@ -62,6 +68,8 @@ def Get_all_properties_from_page(url):
 
     return properties_list
 
+# Essa função faz um loop sobre todas as páginas retornadas na pesquisa,
+# executando a função acima para cada página.
 def Loop_Over_All_Pages(url):
     num_of_pages = Get_Num_Of_Pages(url)
     all_properties = []
@@ -74,13 +82,15 @@ def Loop_Over_All_Pages(url):
 
     return all_properties
 
-mainpage = 'https://www.cardinali.com.br/pesquisa-de-imoveis/?locacao_venda=L&id_cidade%5B%5D=190&finalidade=residencial&dormitorio=0&garagem=0&vmi=&vma='
-properties_list = Loop_Over_All_Pages(mainpage)   
-keys = properties_list[0].keys()
-with open('unidades.csv', 'w', newline='') as f:
-    dict_writer = csv.DictWriter(f, keys, delimiter = ';')
-    dict_writer.writeheader()
-    dict_writer.writerows(properties_list)
+# Main (executa o seu propósito)
+if (__name__ == '__main__'):
+    mainpage = 'https://www.cardinali.com.br/pesquisa-de-imoveis/?locacao_venda=L&id_cidade%5B%5D=190&finalidade=residencial&dormitorio=0&garagem=0&vmi=&vma='
+    properties_list = Loop_Over_All_Pages(mainpage)   
+    keys = properties_list[0].keys()
+    with open('unidades.csv', 'w', newline='') as f:
+        dict_writer = csv.DictWriter(f, keys, delimiter = ';')
+        dict_writer.writeheader()
+        dict_writer.writerows(properties_list)
 
 
 

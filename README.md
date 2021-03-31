@@ -24,7 +24,7 @@ Para executar a extração de dados, basta rodar:
 
 ## Jupyter
 
-Disponibilizei um arquivo onde faço uma exploração dos dados obtidos utilizando o pandas e o seaborn para plotagem. Ele está no notebook incluso no repo.
+Disponibilizei um notebook onde faço uma exploração dos dados obtidos utilizando o pandas e o seaborn para plotagem. Ele está no notebook incluso no repo.
 
 Para executar ele, basta executar:
 
@@ -41,3 +41,4 @@ Fique a vontade para utilizar o arquivo CSV com os dados, ou mesmo fazer suas al
 - Implementar um código que verifica a localização do imóvel por coordenadas e calcula a distância até uma das duas universidades da cidade. A ideia é verificar como o preço varia em função dessa distância. Uma ideia é utilizar alguma API como a do OpenStreetMaps para fazer o geocoding (conversão de endereço para coordenadas), mas ele não consegue encontrar alguns bairros ou nomes de condomínios.
 - Melhorar a análise dos dados.
 - Melhorar esse README.
+- Melhorar os comentários do código.
