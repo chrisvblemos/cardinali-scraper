@@ -1,10 +1,12 @@
 # Introdução
-Isto não é uma análise de dados das casas e apartamentos residenciais disponíveis para locação na imobiliária Cardinalli de São Carlos. No entanto, alguns gráficos mediamente bonitos estão disponíveis.
+
+Extração e (brevíssima) análise de dados a respeito de todas as casas e apartamentos disponíveis para locação no site da imobiliária Cardinali de São Carlos. 
 
 # Principal
 
 ## Pacotes Utilizados
 
+Dê uma olhadinha no arquivo `requirements.txt`.
 ### Código:
 - BeautifulSoap
 - requests
